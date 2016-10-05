@@ -33,6 +33,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -98,6 +99,9 @@ public class BloodcatServer extends DownloadServer {
 			this.totalResults = resultCount;
 		} catch (MalformedURLException | UnsupportedEncodingException e) {
 			ErrorHandler.error(String.format("Problem loading result list for query '%s'.", query), e, true);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return nodes;
 	}

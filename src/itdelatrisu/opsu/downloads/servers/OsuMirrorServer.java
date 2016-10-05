@@ -35,6 +35,7 @@ import java.util.HashMap;
 import java.util.TimeZone;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -124,6 +125,9 @@ public class OsuMirrorServer extends DownloadServer {
 				this.totalResults = maxServerID;
 		} catch (MalformedURLException | UnsupportedEncodingException e) {
 			ErrorHandler.error(String.format("Problem loading result list for query '%s'.", query), e, true);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return nodes;
 	}
