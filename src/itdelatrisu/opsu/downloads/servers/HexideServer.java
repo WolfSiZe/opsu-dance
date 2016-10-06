@@ -69,7 +69,7 @@ public class HexideServer extends DownloadServer {
 	}
 
 	@Override
-	public DownloadNode[] resultList(String query, int page, boolean rankedOnly) throws IOException {
+	public DownloadNode[] resultList(String query, int page, boolean rankedOnly) throws IOException, JSONException {
 		DownloadNode[] nodes = null;
 		try {
 			// read JSON
@@ -128,9 +128,6 @@ public class HexideServer extends DownloadServer {
 			this.totalResults = arr.length() + resultIndex;
 		} catch (MalformedURLException | UnsupportedEncodingException e) {
 			ErrorHandler.error(String.format("Problem loading result list for query '%s'.", query), e, true);
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		return nodes;
 	}

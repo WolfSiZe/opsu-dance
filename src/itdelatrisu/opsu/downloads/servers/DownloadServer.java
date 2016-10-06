@@ -22,6 +22,8 @@ import itdelatrisu.opsu.downloads.DownloadNode;
 
 import java.io.IOException;
 
+import org.json.JSONException;
+
 /**
  * Abstract class for beatmap download servers.
  */
@@ -50,8 +52,9 @@ public abstract class DownloadServer {
 	 * @param rankedOnly whether to only show ranked maps
 	 * @return the result array
 	 * @throws IOException if any connection problem occurs
+	 * @throws JSONException 
 	 */
-	public abstract DownloadNode[] resultList(String query, int page, boolean rankedOnly) throws IOException;
+	public abstract DownloadNode[] resultList(String query, int page, boolean rankedOnly) throws IOException, JSONException;
 
 	/**
 	 * Returns the minimum allowable length of a search query.

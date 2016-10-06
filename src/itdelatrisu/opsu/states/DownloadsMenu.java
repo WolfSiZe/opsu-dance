@@ -52,6 +52,7 @@ import java.net.URL;
 import javax.sound.sampled.LineEvent;
 import javax.sound.sampled.LineListener;
 
+import org.json.JSONException;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -83,7 +84,7 @@ public class DownloadsMenu extends BasicGameState {
 
 	/** Available beatmap download servers. */
 	private static final DownloadServer[] SERVERS = {
-		new BloodcatServer(), new HexideServer(), //new YaSOnlineServer(),
+		new BloodcatServer(), new HexideServer(),
 		new MnetworkServer(), new MengSkyServer()
 	};
 
@@ -242,6 +243,9 @@ public class DownloadsMenu extends BasicGameState {
 			} catch (IOException e) {
 				if (!interrupted)
 					searchResultString = "Could not establish connection to server.";
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			} finally {
 				complete = true;
 			}

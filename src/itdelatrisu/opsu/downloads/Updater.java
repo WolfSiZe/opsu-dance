@@ -109,7 +109,8 @@ public class Updater {
 	private Download download;
 
 	public String getCurrentVersion() {
-		return currentVersion.getMajorVersion() + "." + currentVersion.getMinorVersion() + "." + currentVersion.getIncrementalVersion();
+		return "a";
+		//return currentVersion.getMajorVersion() + "." + currentVersion.getMinorVersion() + "." + currentVersion.getIncrementalVersion();
 	}
 
 	/**

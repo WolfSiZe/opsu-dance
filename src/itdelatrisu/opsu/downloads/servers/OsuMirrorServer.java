@@ -80,7 +80,7 @@ public class OsuMirrorServer extends DownloadServer {
 	}
 
 	@Override
-	public DownloadNode[] resultList(String query, int page, boolean rankedOnly) throws IOException {
+	public DownloadNode[] resultList(String query, int page, boolean rankedOnly) throws IOException, JSONException {
 		// NOTE: ignores 'rankedOnly' flag.
 		DownloadNode[] nodes = null;
 		try {
@@ -125,9 +125,6 @@ public class OsuMirrorServer extends DownloadServer {
 				this.totalResults = maxServerID;
 		} catch (MalformedURLException | UnsupportedEncodingException e) {
 			ErrorHandler.error(String.format("Problem loading result list for query '%s'.", query), e, true);
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		return nodes;
 	}

@@ -67,7 +67,7 @@ public class BloodcatServer extends DownloadServer {
 	}
 
 	@Override
-	public DownloadNode[] resultList(String query, int page, boolean rankedOnly) throws IOException {
+	public DownloadNode[] resultList(String query, int page, boolean rankedOnly) throws IOException, JSONException {
 		DownloadNode[] nodes = null;
 		try {
 			// read JSON
@@ -81,14 +81,24 @@ public class BloodcatServer extends DownloadServer {
 			// parse result list
 			//JSONArray arr = json.getJSONArray("results");
 			nodes = new DownloadNode[arr.length()];
-			for (int i = 0; i < nodes.length; i++) {
-				JSONObject item = arr.getJSONObject(i);
-				nodes[i] = new DownloadNode(
-					item.getInt("id"), formatDate(item.getString("synced")),  //"date"
-					item.getString("title"), item.isNull("titleU") ? null : item.getString("titleU"),  //"titleUnicode"
-					item.getString("artist"), item.isNull("artistU") ? null : item.getString("artistU"),  //"artistUnicode"
-					item.getString("creator")
-				);
+			try {
+				for (int i = 0; i < nodes.length; i++) {
+					JSONObject item = arr.getJSONObject(i);
+					try {
+						nodes[i] = new DownloadNode(
+							item.getInt("id"), formatDate(item.getString("synced")),  //"date"
+							item.getString("title"), item.isNull("titleU") ? null : item.getString("titleU"),  //"titleUnicode"
+							item.getString("artist"), item.isNull("artistU") ? null : item.getString("artistU"),  //"artistUnicode"
+							item.getString("creator")
+						);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 
 			// store total result count
@@ -99,9 +109,6 @@ public class BloodcatServer extends DownloadServer {
 			this.totalResults = resultCount;
 		} catch (MalformedURLException | UnsupportedEncodingException e) {
 			ErrorHandler.error(String.format("Problem loading result list for query '%s'.", query), e, true);
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		return nodes;
 	}
