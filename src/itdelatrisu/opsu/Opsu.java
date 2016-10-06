@@ -161,11 +161,11 @@ public class Opsu extends StateBasedGame {
 		ResourceLoader.addResourceLocation(new FileSystemLocation(new File("./res/")));
 
 		// initialize databases
-//		try {
-//			DBController.init();
-//		} catch (UnsatisfiedLinkError e) {
-//			errorAndExit(e, "The databases could not be initialized.");
-//		}
+		try {
+			//DBController.init();
+		} catch (UnsatisfiedLinkError e) {
+			errorAndExit(e, "The databases could not be initialized.");
+		}
 
 		// check if just updated
 		if (args.length >= 2)
